@@ -34,16 +34,25 @@ function addElement(e){
     }
 }
 
+function deleteGrid(){
+    const squares = document.querySelectorAll(".column"); 
+    squares.forEach(column => column.remove());
+    const rows = document.querySelectorAll("#row");
+    rows.forEach(row => row.remove());
+}
+
 // slider 
 function rangeSlider(value) {    
     /* Get all #range value spans, which is 2 in this case */ 
     let gridLabels = document.querySelectorAll('#range-value');
-    /* Go through all spans, which is 2 in this case */ 
+    /* Go through all spans, which is 2 in this case */     
     for (let i = 0; i < gridLabels.length; i++) {
         gridLabels[i].textContent = value;
     }
     // Set the global variable of the grid size 
     gridSize = parseInt(value);
+    deleteGrid(); 
+    addElement(); 
     /*
     deleteGrid();
     createGrid();
