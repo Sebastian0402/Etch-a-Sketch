@@ -1,6 +1,10 @@
+/* Add global variables here */ 
 let initGridSize = 16;
 let gridSize = initGridSize; 
 
+/* Add functions here */ 
+
+/* This Function shall check periodically, whether the container width has changed. If so, the height is adaptet accordingly to ensure square shape */ 
 function changeMainSquare(){
     const mainSquare = document.querySelector(".mainSquare"); 
     if(mainSquare.clientWidth != mainSquare.clientHeight){
@@ -8,15 +12,13 @@ function changeMainSquare(){
     }     
 }
 
+/* This Function changes the color of the sqaures to black*/ 
+
 function fillSquare(e){
-    console.log("fill");
     this.style.backgroundColor = "black"; 
 }
 
-function checkHovering(){
-    const squares = document.querySelectorAll(".column"); +
-    squares.forEach(column => column.addEventListener("mouseover", fillSquare));      
-}
+/* This Function creates the squares */ 
 function addElement(e){
     let columns = gridSize;
     let rows = gridSize;
@@ -32,8 +34,11 @@ function addElement(e){
         }
         mainSquare.appendChild(row); // append column inside grid
     }
+    // Add Eventlisteners to the squares which are just created // 
+    listen(); 
 }
 
+/* This function deletes the squares */ 
 function deleteGrid(){
     const squares = document.querySelectorAll(".column"); 
     squares.forEach(column => column.remove());
@@ -52,20 +57,7 @@ function rangeSlider(value) {
     // Set the global variable of the grid size 
     gridSize = parseInt(value);
     deleteGrid(); 
-    addElement(); 
-    /*
-    deleteGrid();
-    createGrid();
-    listen();
-    reInit();*/
-    // turn the grid button back on if it is off.
-    /*
-    const gridButton = document.querySelector('#grid-btn');
-    if (gridButton.classList.contains('btn-on')) {
-        //pass
-    } else {
-        gridButton.classList.toggle('btn-on');
-    }*/
+    addElement();      
 }
 
 function rangeSliderValue(value) {
@@ -75,17 +67,18 @@ function rangeSliderValue(value) {
     }
 }
 
+/* This Function adds the eventlistener of hovering to the squares and then calls the fillSquare function */ 
+function listen(){
+    const squares = document.querySelectorAll(".column"); +
+    squares.forEach(column => column.addEventListener("mouseover", fillSquare)); 
+    console.log(squares);
+}
+
+/* This Function creates the initial grid after the webpage loaded  */
 window.addEventListener("load", addElement); 
 
-const mainSquare = document.querySelector(".mainSquare"); 
 
-/* mainSquare.addEventListener("click", addElement); */ 
-
-
-
-
+/* This Function calls the function changeMainSquare periodically within 500ms */
 setInterval(changeMainSquare, 500); 
 
-setInterval(checkHovering, 10); 
-
-
+listen(); 
